@@ -1,0 +1,236 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = int;
+type Testimony = 
+ record {
+   id: Id;
+   imageUrl: opt text;
+   name: text;
+   origin: text;
+   story: text;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Programme = 
+ record {
+   actions: vec text;
+   description: text;
+   displayOrder: nat;
+   id: Id;
+   imageUrl: text;
+   objectives: vec text;
+   title: text;
+ };
+type Photo = 
+ record {
+   caption: text;
+   displayOrder: nat;
+   id: Id;
+   imageUrl: text;
+ };
+type PaymentSettings = 
+ record {
+   acceptedCurrencies: vec Currency;
+   afrimoney: MethodSettings;
+   airtelMoney: MethodSettings;
+   mastercard: MethodSettings;
+   mpesa: MethodSettings;
+   orangeMoney: MethodSettings;
+   testMode: bool;
+   visa: MethodSettings;
+   webhookUrl: text;
+ };
+type PaymentMethod = 
+ variant {
+   afrimoney;
+   airtelMoney;
+   mastercard;
+   mpesa;
+   orangeMoney;
+   visa;
+ };
+type MethodSettings = 
+ record {
+   apiKey: text;
+   apiSecret: text;
+   enabled: bool;
+ };
+type Id = nat;
+type Frequency = 
+ variant {
+   monthly;
+   oneTime;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type DonorInfo = 
+ record {
+   email: text;
+   name: text;
+   phone: opt text;
+ };
+type DonationStatus = 
+ variant {
+   confirmed;
+   failed;
+   pending;
+ };
+type Donation = 
+ record {
+   amount: nat;
+   createdAt: Timestamp;
+   currency: Currency;
+   donor: DonorInfo;
+   frequency: Frequency;
+   id: Id;
+   method: PaymentMethod;
+   programmeId: opt Id;
+   status: DonationStatus;
+   transactionNumber: text;
+ };
+type Currency = 
+ variant {
+   cdf;
+   usd;
+ };
+type ContactMessage = 
+ record {
+   email: text;
+   id: Id;
+   message: text;
+   name: text;
+   receivedAt: Timestamp;
+   subject: text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type Campaign = 
+ record {
+   active: bool;
+   currency: Currency;
+   description: text;
+   goalAmount: nat;
+   id: Id;
+   raisedAmount: nat;
+   title: text;
+ };
+type Article = 
+ record {
+   author: text;
+   category: text;
+   content: text;
+   id: Id;
+   imageUrl: text;
+   published: bool;
+   publishedAt: Timestamp;
+   title: text;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createArticle: (title: text, category: text, author: text, imageUrl: 
+   text, content: text, published: bool) -> (Article);
+  createCampaign: (title: text, description: text, goalAmount: nat, currency:
+   Currency, active: bool) -> (Campaign);
+  /// Public: record a donation (no sign-in required).
+  createDonation: (amount: nat, currency: Currency, frequency: Frequency,
+   programmeId: opt Id, method: PaymentMethod, donor: DonorInfo) ->
+   (Donation);
+  createPhoto: (imageUrl: text, caption: text, displayOrder: nat) -> (Photo);
+  createProgramme: (title: text, description: text, objectives: vec text,
+   actions: vec text, imageUrl: text, displayOrder: nat) -> (Programme);
+  createTestimony: (name: text, origin: text, story: text, imageUrl:
+   opt text) -> (Testimony);
+  deleteArticle: (id: Id) -> (bool);
+  deleteCampaign: (id: Id) -> (bool);
+  deleteContactMessage: (id: Id) -> (bool);
+  deletePhoto: (id: Id) -> (bool);
+  deleteProgramme: (id: Id) -> (bool);
+  deleteTestimony: (id: Id) -> (bool);
+  execute: (qJson: text) -> (Result) query;
+  getApiDoc: () -> (text) query;
+  getArticle: (id: Id) -> (opt Article) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getCampaign: (id: Id) -> (opt Campaign) query;
+  /// Public: read a donation by id (for the confirmation page).
+  getDonation: (id: Id) -> (opt Donation) query;
+  /// Public: payment settings needed by the donation flow.
+  getPaymentSettings: () -> (PaymentSettings) query;
+  getProgramme: (id: Id) -> (opt Programme) query;
+  isCallerAdmin: () -> (bool) query;
+  listActiveCampaigns: () -> (vec Campaign) query;
+  listAllArticles: () -> (vec Article) query;
+  listAllCampaigns: () -> (vec Campaign) query;
+  listContactMessages: () -> (vec ContactMessage) query;
+  /// Admin: list all donations.
+  listDonations: () -> (vec Donation) query;
+  listPhotos: () -> (vec Photo) query;
+  listProgrammes: () -> (vec Programme) query;
+  listPublishedArticles: () -> (vec Article) query;
+  listTestimonies: () -> (vec Testimony) query;
+  schema: () -> (text) query;
+  /// Public contact form submission.
+  submitContactMessage: (name: text, email: text, subject: text, message:
+   text) -> (ContactMessage);
+  updateArticle: (id: Id, title: text, category: text, author: text,
+   imageUrl: text, content: text, published: bool) -> (opt Article);
+  updateCampaign: (id: Id, title: text, description: text, goalAmount: 
+   nat, currency: Currency, active: bool) -> (opt Campaign);
+  /// Admin: update a donation's status.
+  updateDonationStatus: (id: Id, status: DonationStatus) -> (opt Donation);
+  /// Admin: replace payment settings.
+  updatePaymentSettings: (next: PaymentSettings) -> (PaymentSettings);
+  updatePhoto: (id: Id, imageUrl: text, caption: text, displayOrder: 
+   nat) -> (opt Photo);
+  updateProgramme: (id: Id, title: text, description: text, objectives:
+   vec text, actions: vec text, imageUrl: text, displayOrder: nat) ->
+   (opt Programme);
+  updateTestimony: (id: Id, name: text, origin: text, story: text, imageUrl:
+   opt text) -> (opt Testimony);
+}

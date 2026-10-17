@@ -1,0 +1,280 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type Article__129739089 =
+  {
+    author : Text;
+    category : Text;
+    content : Text;
+    id : Id__614397628;
+    imageUrl : Text;
+    published : Bool;
+    publishedAt : Timestamp__622751799;
+    title : Text
+  };
+type Campaign__620994591 =
+  {
+    active : Bool;
+    currency : Currency__884395579;
+    description : Text;
+    goalAmount : Nat;
+    id : Id__614397628;
+    raisedAmount : Nat;
+    title : Text
+  };
+type ContactMessage__274377449 =
+  {
+    email : Text;
+    id : Id__614397628;
+    message : Text;
+    name : Text;
+    receivedAt : Timestamp__622751799;
+    subject : Text
+  };
+type Currency__525631754 = Currency__884395579;
+type Currency__839686289 = {#cdf; #usd};
+type Currency__884395579 = {#cdf; #usd};
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type DonationStatus__87493921 = {#confirmed; #failed; #pending};
+type Donation__677181599 =
+  {
+    amount : Nat;
+    createdAt : Timestamp__480557483;
+    currency : Currency__525631754;
+    donor : DonorInfo__607932721;
+    frequency : Frequency__806305582;
+    id : Id__648378983;
+    method : PaymentMethod__677719106;
+    programmeId : ?Id__648378983;
+    status : DonationStatus__87493921;
+    transactionNumber : Text
+  };
+type DonorInfo__607932721 = {email : Text; name : Text; phone : ?Text};
+type Frequency__326012609 = {#monthly; #oneTime};
+type Frequency__806305582 = Frequency__326012609;
+type Id__389469852 = Nat;
+type Id__614397628 = Id__389469852;
+type Id__648378983 = Id__389469852;
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type MethodSettings__280861268 =
+  {apiKey : Text; apiSecret : Text; enabled : Bool};
+type MethodSettings__394572837 =
+  {apiKey : Text; apiSecret : Text; enabled : Bool};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    articles :
+      Map__230067015<Nat,
+                      {
+                        author : Text;
+                        category : Text;
+                        content : Text;
+                        id : Nat;
+                        imageUrl : Text;
+                        published : Bool;
+                        publishedAt : Int;
+                        title : Text
+                      }>;
+    campaigns :
+      Map__230067015<Nat,
+                      {
+                        active : Bool;
+                        currency : Currency__839686289;
+                        description : Text;
+                        goalAmount : Nat;
+                        id : Nat;
+                        raisedAmount : Nat;
+                        title : Text
+                      }>;
+    contactMessages :
+      Map__230067015<Nat,
+                      {
+                        email : Text;
+                        id : Nat;
+                        message : Text;
+                        name : Text;
+                        receivedAt : Int;
+                        subject : Text
+                      }>;
+    contentState :
+      {
+        var nextArticleId : Nat;
+        var nextCampaignId : Nat;
+        var nextContactMessageId : Nat;
+        var nextPhotoId : Nat;
+        var nextProgrammeId : Nat;
+        var nextTestimonyId : Nat
+      };
+    donationState : {var nextDonationId : Nat};
+    donations :
+      Map__230067015<Nat,
+                      {
+                        amount : Nat;
+                        createdAt : Int;
+                        currency : Currency__839686289;
+                        donor : {email : Text; name : Text; phone : ?Text};
+                        frequency : {#monthly; #oneTime};
+                        id : Nat;
+                        method :
+                          {
+                            #afrimoney;
+                            #airtelMoney;
+                            #mastercard;
+                            #mpesa;
+                            #orangeMoney;
+                            #visa
+                          };
+                        programmeId : ?Nat;
+                        status : {#confirmed; #failed; #pending};
+                        transactionNumber : Text
+                      }>;
+    paymentSettings : {var current : PaymentSettings__47386384};
+    photos :
+      Map__230067015<Nat,
+                      {
+                        caption : Text;
+                        displayOrder : Nat;
+                        id : Nat;
+                        imageUrl : Text
+                      }>;
+    programmes :
+      Map__230067015<Nat,
+                      {
+                        actions : [Text];
+                        description : Text;
+                        displayOrder : Nat;
+                        id : Nat;
+                        imageUrl : Text;
+                        objectives : [Text];
+                        title : Text
+                      }>;
+    testimonies :
+      Map__230067015<Nat,
+                      {
+                        id : Nat;
+                        imageUrl : ?Text;
+                        name : Text;
+                        origin : Text;
+                        story : Text
+                      }>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__512397517 = {};
+type PaymentMethod__677719106 =
+  {#afrimoney; #airtelMoney; #mastercard; #mpesa; #orangeMoney; #visa};
+type PaymentSettings__439029 =
+  {
+    acceptedCurrencies : [Currency__525631754];
+    afrimoney : MethodSettings__280861268;
+    airtelMoney : MethodSettings__280861268;
+    mastercard : MethodSettings__280861268;
+    mpesa : MethodSettings__280861268;
+    orangeMoney : MethodSettings__280861268;
+    testMode : Bool;
+    visa : MethodSettings__280861268;
+    webhookUrl : Text
+  };
+type PaymentSettings__47386384 =
+  {
+    acceptedCurrencies : [Currency__839686289];
+    afrimoney : MethodSettings__394572837;
+    airtelMoney : MethodSettings__394572837;
+    mastercard : MethodSettings__394572837;
+    mpesa : MethodSettings__394572837;
+    orangeMoney : MethodSettings__394572837;
+    testMode : Bool;
+    visa : MethodSettings__394572837;
+    webhookUrl : Text
+  };
+type Photo__132963157 =
+  {caption : Text; displayOrder : Nat; id : Id__614397628; imageUrl : Text};
+type Programme__502266416 =
+  {
+    actions : [Text];
+    description : Text;
+    displayOrder : Nat;
+    id : Id__614397628;
+    imageUrl : Text;
+    objectives : [Text];
+    title : Text
+  };
+type Testimony__299909449 =
+  {
+    id : Id__614397628;
+    imageUrl : ?Text;
+    name : Text;
+    origin : Text;
+    story : Text
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__480557483 = Timestamp__301639476;
+type Timestamp__622751799 = Timestamp__301639476;
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "00000000_000000" : OldActor__512397517 -> NewActor__769816496
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable articles :
+    {
+      var root : Node__204828119<Id__614397628, Article__129739089>;
+      var size : Nat__227979830
+    };
+  stable campaigns :
+    {
+      var root : Node__204828119<Id__614397628, Campaign__620994591>;
+      var size : Nat__227979830
+    };
+  stable contactMessages :
+    {
+      var root : Node__204828119<Id__614397628, ContactMessage__274377449>;
+      var size : Nat__227979830
+    };
+  stable contentState :
+    {
+      var nextArticleId : Nat;
+      var nextCampaignId : Nat;
+      var nextContactMessageId : Nat;
+      var nextPhotoId : Nat;
+      var nextProgrammeId : Nat;
+      var nextTestimonyId : Nat
+    };
+  stable donationState : {var nextDonationId : Nat};
+  stable donations :
+    {
+      var root : Node__204828119<Id__648378983, Donation__677181599>;
+      var size : Nat__227979830
+    };
+  stable paymentSettings : {var current : PaymentSettings__439029};
+  stable photos :
+    {
+      var root : Node__204828119<Id__614397628, Photo__132963157>;
+      var size : Nat__227979830
+    };
+  stable programmes :
+    {
+      var root : Node__204828119<Id__614397628, Programme__502266416>;
+      var size : Nat__227979830
+    };
+  stable testimonies :
+    {
+      var root : Node__204828119<Id__614397628, Testimony__299909449>;
+      var size : Nat__227979830
+    }
+};

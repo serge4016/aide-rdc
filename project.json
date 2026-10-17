@@ -1,0 +1,21 @@
+{
+  "overview": "Site humanitaire en français pour Aide RDC, venant en aide aux personnes déplacées par le conflit armé à l'est de la République démocratique du Congo, avec pages d'information, blog, témoignages, galerie, parcours de don multi-étapes et panneau d'administration.",
+  "features": [
+    "Pages publiques complètes en français : accueil avec chiffres clés de la crise, à propos, programmes, blog avec articles détaillés, témoignages, galerie photos, contact, FAQ, mentions légales et politique de confidentialité",
+    "Parcours de don multi-étapes : montants prédéfinis ou libres, devises USD et CDF, don unique ou mensuel, affectation à un programme, choix de la méthode de paiement",
+    "Méthodes de paiement M-Pesa, Orange Money, Airtel Money, Afrimoney et cartes VISA/Mastercard avec formulaires dédiés",
+    "Récapitulatif du don et page de confirmation avec reçu et numéro de transaction",
+    "Panneau d'administration protégé pour gérer articles, programmes, témoignages, galerie, campagnes de don et paramètres de paiement",
+    "Design responsive aux couleurs du drapeau congolais : bleu ciel, jaune et rouge"
+  ],
+  "category": "site-humanitaire",
+  "tags": [
+    "humanitaire",
+    "rdc",
+    "ong",
+    "dons",
+    "blog",
+    "fran-ais"
+  ],
+  "last_updated": "2026-10-17T08:59:50.990Z"
+}

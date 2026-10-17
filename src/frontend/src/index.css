@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Fraunces", serif;
+    --font-body: "General Sans", sans-serif;
+    --font-mono: "Geist Mono", monospace;
+    --radius: 0.75rem;
+
+    /* Warm humanitarian canvas — cream, not cold white */
+    --background: 0.975 0.012 85;
+    --foreground: 0.22 0.03 250;
+    --card: 0.995 0.006 85;
+    --card-foreground: 0.22 0.03 250;
+    --popover: 0.995 0.006 85;
+    --popover-foreground: 0.22 0.03 250;
+
+    /* Sky blue — Congolese flag, trust + calm */
+    --primary: 0.5 0.14 235;
+    --primary-foreground: 0.98 0.01 235;
+
+    /* Warm gold — hope, secondary surfaces */
+    --secondary: 0.93 0.03 88;
+    --secondary-foreground: 0.32 0.05 75;
+    --muted: 0.94 0.018 85;
+    --muted-foreground: 0.5 0.025 250;
+
+    /* Gold accent — highlights, active states */
+    --accent: 0.78 0.15 78;
+    --accent-foreground: 0.24 0.05 70;
+
+    /* Flag red — urgency, alerts */
+    --destructive: 0.53 0.2 27;
+    --destructive-foreground: 0.98 0.01 27;
+
+    --success: 0.58 0.13 155;
+    --success-foreground: 0.98 0.01 155;
+    --warning: 0.78 0.15 78;
+    --warning-foreground: 0.24 0.05 70;
+
+    --border: 0.89 0.02 85;
+    --input: 0.89 0.02 85;
+    --ring: 0.5 0.14 235;
+
+    --chart-1: 0.5 0.14 235;
+    --chart-2: 0.78 0.15 78;
+    --chart-3: 0.53 0.2 27;
+    --chart-4: 0.58 0.13 155;
+    --chart-5: 0.62 0.11 300;
+
+    --sidebar: 0.96 0.014 85;
+    --sidebar-foreground: 0.22 0.03 250;
+    --sidebar-primary: 0.5 0.14 235;
+    --sidebar-primary-foreground: 0.98 0.01 235;
+    --sidebar-accent: 0.93 0.03 88;
+    --sidebar-accent-foreground: 0.32 0.05 75;
+    --sidebar-border: 0.89 0.02 85;
+    --sidebar-ring: 0.5 0.14 235;
+
+    /* Depth + motion tokens */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.55 0.15 232),
+      oklch(0.44 0.13 245)
+    );
+    --gradient-warm: linear-gradient(
+      135deg,
+      oklch(0.86 0.13 82),
+      oklch(0.78 0.15 70)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.975 0.012 85),
+      oklch(0.95 0.02 88)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.17 0.025 250;
+    --foreground: 0.94 0.012 85;
+    --card: 0.21 0.03 250;
+    --card-foreground: 0.94 0.012 85;
+    --popover: 0.23 0.03 250;
+    --popover-foreground: 0.94 0.012 85;
+
+    --primary: 0.68 0.13 232;
+    --primary-foreground: 0.16 0.03 235;
+
+    --secondary: 0.26 0.03 250;
+    --secondary-foreground: 0.88 0.015 85;
+    --muted: 0.26 0.03 250;
+    --muted-foreground: 0.66 0.02 250;
+
+    --accent: 0.8 0.14 78;
+    --accent-foreground: 0.18 0.04 70;
+
+    --destructive: 0.62 0.19 27;
+    --destructive-foreground: 0.16 0.03 27;
+
+    --success: 0.68 0.13 155;
+    --success-foreground: 0.16 0.03 155;
+    --warning: 0.8 0.14 78;
+    --warning-foreground: 0.18 0.04 70;
+
+    --border: 0.3 0.03 250;
+    --input: 0.3 0.03 250;
+    --ring: 0.68 0.13 232;
+
+    --chart-1: 0.68 0.13 232;
+    --chart-2: 0.8 0.14 78;
+    --chart-3: 0.62 0.19 27;
+    --chart-4: 0.68 0.13 155;
+    --chart-5: 0.7 0.11 300;
+
+    --sidebar: 0.21 0.03 250;
+    --sidebar-foreground: 0.94 0.012 85;
+    --sidebar-primary: 0.68 0.13 232;
+    --sidebar-primary-foreground: 0.16 0.03 235;
+    --sidebar-accent: 0.26 0.03 250;
+    --sidebar-accent-foreground: 0.88 0.015 85;
+    --sidebar-border: 0.3 0.03 250;
+    --sidebar-ring: 0.68 0.13 232;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.62 0.14 232),
+      oklch(0.5 0.13 245)
+    );
+    --gradient-warm: linear-gradient(
+      135deg,
+      oklch(0.72 0.14 82),
+      oklch(0.6 0.15 70)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.17 0.025 250),
+      oklch(0.21 0.03 250)
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-warm {
+    background-image: var(--gradient-warm);
+  }
+
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  /* Signature: Congolese flag ribbon — blue / gold / red */
+  .flag-ribbon {
+    background-image: linear-gradient(
+      90deg,
+      oklch(var(--primary)) 0%,
+      oklch(var(--primary)) 40%,
+      oklch(var(--accent)) 40%,
+      oklch(var(--accent)) 72%,
+      oklch(var(--destructive)) 72%,
+      oklch(var(--destructive)) 100%
+    );
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
